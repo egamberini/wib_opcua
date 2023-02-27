@@ -76,7 +76,7 @@ include_directories (
 #-----
 #As of 03-Sep-2015 I see no FindXerces or whatever in our Cmake 2.8 installation, so no find_package can be user...
 # TODO perhaps also take it from environment if requested
-SET( XML_LIBS $ENV{CMAKE_PREFIX_PATH}/lib/libxerces-c.so) 
+SET( XML_LIBS xerces-c) 
 
 #-----
 #General settings

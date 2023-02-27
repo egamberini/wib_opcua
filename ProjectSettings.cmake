@@ -3,13 +3,13 @@
 ## information how to use this file.
 ## ----------------------------------------------------
 
-find_package(Protobuf REQUIRED)
+#find_package(Protobuf REQUIRED)
 
 set(CUSTOM_SERVER_MODULES WIBProto )
 set(EXECUTABLE OpcUaServer)
-set(SERVER_INCLUDE_DIRECTORIES ${Protobuf_INCLUDE_DIRS} )
-set(SERVER_LINK_LIBRARIES $ENV{CMAKE_PREFIX_PATH}/lib64/libprotobuf.so zmq)
-set(SERVER_LINK_DIRECTORIES  )
+set(SERVER_INCLUDE_DIRECTORIES /usr/include/protobuf3/ )
+set(SERVER_LINK_LIBRARIES protobuf zmq)
+set(SERVER_LINK_DIRECTORIES /usr/lib64/protobuf3 )
 
 ##
 ## If ON, in addition to an executable, a shared object will be created.
