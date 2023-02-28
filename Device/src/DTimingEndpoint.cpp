@@ -75,7 +75,7 @@ UaStatus DTimingEndpoint::callPoll (
 {
     wib::GetTimingStatus req;
     wib::GetTimingStatus::TimingStatus rep;
-    if (getParent()->wib.send_command(req,rep,10000)) {
+    if (getParent()->wib.send_command(req,rep,1000)) {
         auto *as = getAddressSpaceLink();
         
         as->setLol_val(rep.lol_val(), OpcUa_Good);

@@ -88,7 +88,7 @@ UaStatus DFEMBPower::callSet (
     conf_req.set_ldo_a0(as->getLdo_a0_setpoint());
     conf_req.set_ldo_a1(as->getLdo_a1_setpoint());
     wib::Status conf_rep;
-    if (getParent()->wib.send_command(conf_req,conf_rep,10000)) {
+    if (getParent()->wib.send_command(conf_req,conf_rep,1000)) {
         if (!conf_rep.success()) return OpcUa_Bad;
     } else {
         return OpcUa_Bad;
@@ -102,7 +102,7 @@ UaStatus DFEMBPower::callSet (
     req.set_cold(cold);
     req.set_stage(stage);
     wib::Status rep;
-    if (getParent()->wib.send_command(req,rep,10000)) {
+    if (getParent()->wib.send_command(req,rep,1000)) {
         success = rep.success();
         return OpcUa_Good;
     } else {

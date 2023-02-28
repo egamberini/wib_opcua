@@ -14,6 +14,7 @@ WIB_ZMQ::~WIB_ZMQ()
 
 void WIB_ZMQ::connect(const std::string &zmq_endpoint)
 {
+    m_zmq_endpoint = zmq_endpoint;
     socket.connect(zmq_endpoint);
     poller.socket = socket;
     poller.events = ZMQ_POLLIN;
