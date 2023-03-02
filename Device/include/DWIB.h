@@ -24,7 +24,6 @@
 #include <Base_DWIB.h>
 
 #include "wib.hh"
-#include <zmq.hpp>
 #include "timer.hh"
 
 namespace Device

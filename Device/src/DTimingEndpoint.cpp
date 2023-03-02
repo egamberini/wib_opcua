@@ -75,14 +75,14 @@ UaStatus DTimingEndpoint::callPoll (
 {
     wib::GetTimingStatus req;
     wib::GetTimingStatus::TimingStatus rep;
-    if (getParent()->wib.send_command(req,rep,1000)) {
+    if (getParent()->wib.send_command(req,rep,10000)) {
         auto *as = getAddressSpaceLink();
         
         as->setLol_val(rep.lol_val(), OpcUa_Good);
         as->setLol_flg_val(rep.lol_flg_val(), OpcUa_Good);
         
-        as->setLol_val(rep.los_val(), OpcUa_Good);
-        as->setLol_flg_val(rep.los_flg_val(), OpcUa_Good);
+        as->setLos_val(rep.los_val(), OpcUa_Good);
+        as->setLos_flg_val(rep.los_flg_val(), OpcUa_Good);
         
         as->setEpt_status(rep.ept_status(), OpcUa_Good);
         

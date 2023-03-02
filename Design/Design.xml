@@ -54,7 +54,36 @@
 				command
 			</d:documentation>
 		</d:cachevariable>
-
+		<d:cachevariable initializeWith="configuration"
+			dataType="OpcUa_Boolean" name="femb0_on"
+			nullPolicy="nullForbidden" addressSpaceWrite="regular">
+		</d:cachevariable>
+		<d:cachevariable initializeWith="configuration"
+			dataType="OpcUa_Boolean" name="femb1_on"
+			nullPolicy="nullForbidden" addressSpaceWrite="regular">
+		</d:cachevariable>
+		<d:cachevariable initializeWith="configuration"
+			dataType="OpcUa_Boolean" name="femb2_on"
+			nullPolicy="nullForbidden" addressSpaceWrite="regular">
+		</d:cachevariable>
+		<d:cachevariable initializeWith="configuration"
+			dataType="OpcUa_Boolean" name="femb3_on"
+			nullPolicy="nullForbidden" addressSpaceWrite="regular">
+		</d:cachevariable>
+		<d:cachevariable initializeWith="configuration"
+			dataType="OpcUa_Boolean" name="cold"
+			nullPolicy="nullForbidden" addressSpaceWrite="regular">
+		</d:cachevariable>
+		<d:cachevariable initializeWith="valueAndStatus"
+			dataType="OpcUa_Boolean" name="configure" nullPolicy="nullForbidden"
+			addressSpaceWrite="regular" initialValue="OpcUa_False"
+			initialStatus="OpcUa_Good">
+		</d:cachevariable>
+		<d:cachevariable initializeWith="configuration"
+			dataType="OpcUa_UInt32" name="stage"
+			nullPolicy="nullForbidden" addressSpaceWrite="regular">
+		</d:cachevariable>
+		
 		<d:method name="set" executionSynchronicity="synchronous">
 			<d:argument dataType="OpcUa_Boolean" name="femb0_on"></d:argument>
 			<d:argument dataType="OpcUa_Boolean" name="femb1_on"></d:argument>
@@ -789,10 +818,9 @@
 			addressSpaceWrite="forbidden"
 			initialStatus="OpcUa_BadWaitingForInitialData" initialValue="null">
 		</d:cachevariable>
-		<d:cachevariable initializeWith="valueAndStatus"
+		<d:cachevariable initializeWith="configuration"
 			dataType="OpcUa_UInt32" name="poll_period" nullPolicy="nullForbidden"
-			addressSpaceWrite="regular" initialValue="1"
-			initialStatus="OpcUa_Good">
+			addressSpaceWrite="regular">
 		</d:cachevariable>
 
 		<d:documentation>

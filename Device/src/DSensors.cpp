@@ -75,7 +75,7 @@ UaStatus DSensors::callPoll (
 {
     wib::GetSensors req;
     wib::GetSensors::Sensors rep;
-    if (getParent()->wib.send_command(req,rep,1000)) {
+    if (getParent()->wib.send_command(req,rep,10000)) {
         auto *as = getAddressSpaceLink();
         as->setLtc2990_4e_v0(rep.ltc2990_4e_voltages(0), OpcUa_Good);
         as->setLtc2990_4e_v1(rep.ltc2990_4e_voltages(1), OpcUa_Good);
