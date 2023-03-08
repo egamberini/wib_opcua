@@ -121,8 +121,42 @@ void DFEMBPower::update()
 	auto *as = getAddressSpaceLink();
 	if (as->getConfigure() == OpcUa_True) {
 		LOG(Log::INF) << "do configuration";
-		sleep(1);
-		as->setConfigure(OpcUa_False, OpcUa_Good);
+	    wib::ConfigurePower conf_req;
+	    conf_req.set_dc2dc_o1(as->getDc2dc_o1_setpoint());
+	    conf_req.set_dc2dc_o2(as->getDc2dc_o2_setpoint());
+	    conf_req.set_dc2dc_o3(as->getDc2dc_o3_setpoint());
+	    conf_req.set_dc2dc_o4(as->getDc2dc_o4_setpoint());
+	    conf_req.set_ldo_a0(as->getLdo_a0_setpoint());
+	    conf_req.set_ldo_a1(as->getLdo_a1_setpoint());
+	    wib::Status conf_rep;
+	    if (getParent()->wib.send_command(conf_req,conf_rep,10000)) {
+	        if (!conf_rep.success()) {
+	            as->setConfigure(OpcUa_False, OpcUa_Bad);
+	            return;
+	        }
+	    } else {
+	        as->setConfigure(OpcUa_False, OpcUa_Bad);
+	        return;
+	    }
+
+	    wib::PowerWIB req;
+	    req.set_femb0(as->getFemb0_on());
+	    req.set_femb1(as->getFemb1_on());
+	    req.set_femb2(as->getFemb2_on());
+	    req.set_femb3(as->getFemb3_on());
+	    req.set_cold(as->getCold());
+	    req.set_stage(as->getStage());
+	    wib::Status rep;
+	    if (getParent()->wib.send_command(req,rep,10000)) {
+	    	if (!rep.success()) {
+	    		as->setConfigure(OpcUa_False, OpcUa_Bad);
+	    	} else {
+	    		as->setConfigure(OpcUa_False, OpcUa_Good);
+	    	}
+	    } else {
+	    	as->setConfigure(OpcUa_False, OpcUa_Bad);
+	    }
+
 	}
 }
 
