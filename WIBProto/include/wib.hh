@@ -36,7 +36,7 @@ public:
         memcpy((void*)request.data(), cmd_str.c_str(), cmd_str.size());
         m_socket->send(request,zmq::send_flags::none);
 
-        if (zmq_poll(&m_poller, 1, 2000) <= 0) { // EG: it should use timeout_ms instead of hardcoded value
+        if (zmq_poll(&m_poller, 1, timeout_ms) <= 0) {
             std::cout << "poll failed for endpoint " << m_zmq_endpoint << " Reconnecting socket" << std::endl;
             this->reconnect();
             return false;
@@ -45,10 +45,10 @@ public:
         zmq::message_t reply;
         m_socket->recv(reply,zmq::recv_flags::none);
 
-       	std::string reply_str(static_cast<char*>(reply.data()), reply.size());
-       	repl.ParseFromString(reply_str);
+        std::string reply_str(static_cast<char*>(reply.data()), reply.size());
+        repl.ParseFromString(reply_str);
 
-       	return true;
+        return true;
     }
     
 protected:
