@@ -120,7 +120,6 @@ void DFEMBPower::update()
 {
 	auto *as = getAddressSpaceLink();
 	if (as->getConfigure() == OpcUa_True) {
-		LOG(Log::INF) << "do configuration";
 	    wib::ConfigurePower conf_req;
 	    conf_req.set_dc2dc_o1(as->getDc2dc_o1_setpoint());
 	    conf_req.set_dc2dc_o2(as->getDc2dc_o2_setpoint());
@@ -131,11 +130,13 @@ void DFEMBPower::update()
 	    wib::Status conf_rep;
 	    if (getParent()->wib.send_command(conf_req,conf_rep,10000)) {
 	        if (!conf_rep.success()) {
-	            as->setConfigure(OpcUa_False, OpcUa_Bad);
+	        	as->setConfigure(OpcUa_False, OpcUa_Good);
+	            as->setConfigure_done(OpcUa_False, OpcUa_Good);
 	            return;
 	        }
 	    } else {
-	        as->setConfigure(OpcUa_False, OpcUa_Bad);
+	    	as->setConfigure(OpcUa_False, OpcUa_Good);
+	        as->setConfigure_done(OpcUa_False, OpcUa_Good);
 	        return;
 	    }
 
@@ -149,12 +150,15 @@ void DFEMBPower::update()
 	    wib::Status rep;
 	    if (getParent()->wib.send_command(req,rep,10000)) {
 	    	if (!rep.success()) {
-	    		as->setConfigure(OpcUa_False, OpcUa_Bad);
+	    		as->setConfigure(OpcUa_False, OpcUa_Good);
+	    		as->setConfigure_done(OpcUa_False, OpcUa_Good);
 	    	} else {
 	    		as->setConfigure(OpcUa_False, OpcUa_Good);
+	    		as->setConfigure_done(OpcUa_True, OpcUa_Good);
 	    	}
 	    } else {
-	    	as->setConfigure(OpcUa_False, OpcUa_Bad);
+	    	as->setConfigure(OpcUa_False, OpcUa_Good);
+	    	as->setConfigure_done(OpcUa_False, OpcUa_Good);
 	    }
 
 	}

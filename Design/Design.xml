@@ -97,6 +97,11 @@
 				current voltage settings
 			</d:documentation>
 		</d:method>
+		<d:cachevariable initializeWith="valueAndStatus"
+			dataType="OpcUa_Boolean" name="configure_done"
+			nullPolicy="nullForbidden" addressSpaceWrite="forbidden"
+			initialStatus="OpcUa_BadWaitingForInitialData" initialValue="OpcUa_False">
+		</d:cachevariable>
 
 		<d:documentation>
 			Control the FEMB power subsystem on the WIB
