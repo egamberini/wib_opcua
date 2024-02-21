@@ -107,17 +107,16 @@ UaStatus DWIB::callGetSWVersion (
 // 3     You can do whatever you want, but please be decent.               3
 // 3333333333333333333333333333333333333333333333333333333333333333333333333
 
-void DWIB::update() 
+void DWIB::update()
 {
-    fembpower()->update();
-    sensors()->update();
-    timingendpoint()->update();
-
     auto *as = getAddressSpaceLink();
     if (as->getPoll_period() > 0 && poll_timer.elapsed() > as->getPoll_period()) {
     	poll_timer.reset();
     	getFWVersion();
     	getSWVersion();
+    	fembpower()->update();
+    	sensors()->update();
+    	timingendpoint()->update();
     }
 }
 

@@ -185,12 +185,8 @@ UaStatus DSensors::callPoll (
 // 3333333333333333333333333333333333333333333333333333333333333333333333333
 
 void DSensors::update() {
-    auto *as = getAddressSpaceLink();
-    if (as->getPoll_period() > 0 && poll_timer.elapsed() > as->getPoll_period()) {
-        poll_timer.reset();
-        OpcUa_Boolean success;
-        callPoll(success);
-    }
+    OpcUa_Boolean success;
+    callPoll(success);
 }
 
 }

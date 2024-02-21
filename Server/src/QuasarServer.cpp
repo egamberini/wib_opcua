@@ -44,15 +44,20 @@ QuasarServer::~QuasarServer()
 void QuasarServer::mainLoop()
 {
     printServerMsg("Press "+std::string(SHUTDOWN_SEQUENCE)+" to shutdown server");
-
     // Wait for user command to terminate the server thread.
+
+    std::vector<std::thread> threads;
     while(ShutDownFlag() == 0)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         Device::DRoot *root = Device::DRoot::getInstance();
         for (Device::DWIB *wib : root->wibs()) {
-            wib->update();
+            threads.push_back(std::thread(&Device::DWIB::update, wib));
         }
+        for (auto &t : threads) {
+        	t.join();
+        }
+        threads.clear();
     }
     printServerMsg(" Shutting down server");
 }
