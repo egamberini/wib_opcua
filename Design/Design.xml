@@ -706,15 +706,6 @@
 				FEMB3 Bias 5V (post-sense)
 			</d:documentation>
 		</d:cachevariable>
-
-		<d:cachevariable initializeWith="configuration"
-			dataType="OpcUa_UInt32" name="poll_period" nullPolicy="nullForbidden"
-			addressSpaceWrite="regular">
-			<d:documentation>
-				Sensor polling period in seconds. Zero for no automatic
-				polling.
-			</d:documentation>
-		</d:cachevariable>
 		<d:method name="poll" executionSynchronicity="synchronous">
 			<d:returnvalue dataType="OpcUa_Boolean" name="success"></d:returnvalue>
 			<d:documentation>
@@ -761,15 +752,6 @@
 			initialStatus="OpcUa_BadWaitingForInitialData">
 			<d:documentation>
 				CDR stick Loss Of Signal register
-			</d:documentation>
-		</d:cachevariable>
-
-		<d:cachevariable initializeWith="configuration"
-			dataType="OpcUa_UInt32" name="poll_period" nullPolicy="nullForbidden"
-			addressSpaceWrite="regular">
-			<d:documentation>
-				Endpoint polling period in seconds. Zero for no
-				automatic polling.
 			</d:documentation>
 		</d:cachevariable>
 		<d:method name="poll" executionSynchronicity="synchronous">

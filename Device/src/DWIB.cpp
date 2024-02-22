@@ -56,7 +56,7 @@ namespace Device
 DWIB::DWIB (
     const Configuration::WIB& config,
     Parent_DWIB* parent
-): 
+):
     Base_DWIB( config, parent)
 {
     LOG(Log::INF) << "Connecting to WIB at " << config.zmq_endpoint();
